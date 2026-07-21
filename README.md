@@ -1,6 +1,7 @@
 # SRGAN for Super-Resolution + Downstream Classification (Dogs vs Cats)
 
 **Course:** AI / Deep Learning — Midterm Exam
+**Author:** pnichit@charlotte.edu
 
 This project builds a **Super-Resolution GAN (SRGAN)** that upscales **32×32** low-resolution
 images to **128×128** high-resolution images (×4 super-resolution), and then studies whether
@@ -12,6 +13,31 @@ Everything is implemented in one reproducible notebook:
 
 **Pipeline:** Model **A** (classifier on real 128×128) → **SRGAN** (32→128, ≥150 epochs) →
 Model **B** (classifier on SRGAN-generated 128×128) → **compare A vs B** (Accuracy, F1, AUC).
+
+---
+
+## Quick Start (for anyone reproducing this)
+
+1. **Get the dataset** — download the *Dogs vs. Cats* image set from Kaggle
+   (e.g. [kaggle.com/datasets/salader/dogs-vs-cats](https://www.kaggle.com/datasets/salader/dogs-vs-cats),
+   or any cats/dogs set with a `cats/` + `dogs/` layout). Upload the **`.zip` to your own
+   Google Drive**.
+2. **Open** `SRGAN_Midterm.ipynb` in Google Colab → `Runtime → Change runtime type → T4 GPU`.
+3. **Edit the Config cell** to use **your own** paths and the full-run settings:
+   ```python
+   USE_DRIVE      = True
+   DRIVE_ROOT     = "/content/drive/MyDrive/<your folder>"          # <-- YOUR Drive folder
+   DRIVE_DATA_DIR = "/content/drive/MyDrive/<path to the dataset>"  # <-- where you put the data/zip
+   QUICK_RUN      = False        # full run (150 SRGAN epochs)
+   BATCH_SIZE     = 32           # good default for a T4
+   ```
+4. **`Runtime → Run all`.** Training checkpoints to your Drive every few epochs; if the Colab
+   session ends, just re-run the training cell and it resumes (`Resumed from checkpoint at
+   epoch N`). Repeat until the SRGAN reaches 150 epochs, then run the remaining cells to train
+   Model B and produce the A-vs-B metrics and figures.
+
+> Just verifying the pipeline quickly? Leave `QUICK_RUN = True` (and `USE_DRIVE = False` if
+> running locally) for a few-minute smoke test on a small subset — same code path, tiny scale.
 
 ---
 
