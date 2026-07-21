@@ -1,7 +1,6 @@
 # SRGAN for Super-Resolution + Downstream Classification (Dogs vs Cats)
 
 **Course:** AI / Deep Learning — Midterm Exam
-**Author:** pnichit@charlotte.edu
 
 This project builds a **Super-Resolution GAN (SRGAN)** that upscales **32×32** low-resolution
 images to **128×128** high-resolution images (×4 super-resolution), and then studies whether
